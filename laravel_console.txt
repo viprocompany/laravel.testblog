@@ -1,0 +1,52 @@
+composer create-project --prefer-dist laravel/laravel laravel.testblog
+
+php artisan make:model Article -fm
+php artisan make:model Tag -fm 
+php artisan make:model Comment -fm
+php artisan make:model State -fm
+
+php artisan make:migration create_article_tag_table
+
+после того прописать данные таблиц, фабрики и сидера:
+php artisan migrate
+php artisan db:seed
+
+
+
+Эти команды были выполненыза счет введения флага -fm в php artisan make:model .... -fm:
+php artisan make:migration create_articles_table
+php artisan make:migration create_tags_table
+php artisan make:migration create_states_table
+php artisan make:migration create_comments_table
+php artisan make:factory ArticleFactory --node=Article
+php artisan make:factory TagFactory --node=Tag
+php artisan make:factory CommentFactory --node=Comment
+php artisan make:factory StateFactory --node=State
+
+php artisan migrate
+php artisan db:seed
+перезапуск сидера при условии , что выскакивают ошибки дублирования при создании
+ фейковых значений колонок:
+php artisan migrate:refresh --seed
+
+
+php artisan serve
+composer upgrade
+
+
+
+для гитхаба:
+git init
+
+composer require laravel/ui
+php artisan ui vue --auth
+npm install && npm run dev
+
+npm run dev
+npm run prod
+npm run watch
+
+
+
+
+
