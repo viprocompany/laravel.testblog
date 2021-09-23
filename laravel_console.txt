@@ -37,6 +37,13 @@ composer upgrade
 
 для гитхаба:
 git init
+git status
+git add .
+git remote add origin git@github.com:viprocompany/laravel.testblog.git
+git push -u origin master
+
+
+
 
 composer require laravel/ui
 php artisan ui vue --auth
