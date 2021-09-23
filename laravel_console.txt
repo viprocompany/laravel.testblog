@@ -1,5 +1,5 @@
 composer create-project --prefer-dist laravel/laravel laravel.testblog
-
+генерация модели с фабрикой:
 php artisan make:model Article -fm
 php artisan make:model Tag -fm 
 php artisan make:model Comment -fm
@@ -39,15 +39,47 @@ composer upgrade
 git init
 git status
 git add .
+
+git commit -m "#2"
+подключения проекта к гитхабу и отправка туда файлов:
 git remote add origin git@github.com:viprocompany/laravel.testblog.git
 git push -u origin master
 
+отправка изменений в удаленный(origin) репозиторий в ветку master:
+git push origin master
 
+получение изменений из репозитория:
+git pull origin master
 
-
+добавление пакетов для панели debugbar, хелпера для IDE, и пакета UI чтобы можно
+ было потом добавить Vue.js:
+composer require barryvdh/laravel-debugbar --dev
+composer require barryvdh/laravel-ide-helper --dev
 composer require laravel/ui
+
+
+php artisan ui vue
+пользоваться файлом сборщиком webpack.mix.js можно только после установленного
+ выше скайфолдинга ui для vue
+можно с аутентификациейЯ:
 php artisan ui vue --auth
 npm install && npm run dev
+
+просмотр команд:
+npm -h
+
+удаление дефолтных библиотек:
+npm uninstall bootstrap jquery
+
+добавление библиотек:
+npm install bootstrap
+npm i bootstrap-icons    (библиотека иконок, появилась в бутстрап 5)
+npm install --save @fortawesome/fontawesome-free
+npm install vue
+
+
+при использовании бутстрап 5 не нужно использовать resize.css/normalize.css, 
+так как есть файл bootstrap-reboot.css для нормализации стилей
 
 npm run dev
 npm run prod
