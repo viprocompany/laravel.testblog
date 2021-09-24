@@ -4,5 +4,27 @@
 // Variables
 @import 'variables';
 
-// Bootstrap
+// Bootstrap 5
 @import '~bootstrap/scss/bootstrap';
+// данная библиотека была добавлена с помощью npm
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+
+//fontawesome-free. данная библиотека была добавлена с помощью npm
+
+// основной файл с ядром , миксинами , библиотеками
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+// три группы иконок
+@import "@fortawesome/fontawesome-free/scss/brands";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/regular";
+
+
+// header
+@import "modules/header";
+
+// hero section
+@import "modules/hero";
+
+// article
+@import "modules/article";

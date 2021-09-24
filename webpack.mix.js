@@ -11,6 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
+// используем .version() для создания файла манифеста, после каждого запуска сборщика кода он буде т обновляться и соответственно браузер будет брать новые стили а не пользоваться кэшем
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css').version();
+
+mix.copy('resources/img', 'public/img');

@@ -3,7 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Article;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
 use Illuminate\Support\Str;
 
 class ArticleFactory extends Factory
@@ -35,6 +37,8 @@ class ArticleFactory extends Factory
             'img' => 'https://via.placeholder.com/600/009BFF/FFFFFF/?text=LARAVEL:8.*',
           // с помощью faker и его метода dateTimeBetween генерируем даты созданные год назад и раньше
             'created_at' => $this->faker->dateTimeBetween('-1 years'),
+          //дата на текущий момент с помощью библиотеки Carbon
+          'published_at' => Carbon::now(),
         ];
     }
 }

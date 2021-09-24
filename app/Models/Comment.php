@@ -37,4 +37,10 @@ class Comment extends Model
     public function article(){
       return $this->belongsTo(Article::class);
     }
+
+  //время создания комментария в человекочитаемом формате с использование  карбоновской функции diffForHumans
+  public function createdAtForHumans(){
+    return $this->created_at->diffForHumans();
+//        return $this->published_at->diffForHumans();
+  }
 }

@@ -19,6 +19,8 @@ class CreateArticlesTable extends Migration
             $table->string('slug')->unique();
             $table->text('body');
             $table->string('img');
+            //timestamp в одиночном числе дата публикации
+            $table->timestamp('published_at');
             $table->timestamps();
         });
     }

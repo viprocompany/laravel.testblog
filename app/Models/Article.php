@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * App\Models\Article
@@ -41,6 +42,10 @@ class Article extends Model
 //    разрешенные поля
     protected $fillable = ['title' , 'body', 'img' ,'slug'];
 
+//для того чтобы с данным таймстампом могла работать библиотека Carbon добавляем его в массив дат
+      public $dates = ['published_at'];
+
+
 //    связь один пост ко многимкомментариям с таблицей комментариев для возможности вытащить комменты к посту
   public function comments(){
     return $this->hasMany(Comment::class);
@@ -55,5 +60,50 @@ class Article extends Model
 
     return $this->belongsToMany(Tag::class);
   }
+
+//метод для обрезки количества знаков в записи с помощью хелпера limit
+  public function getBodyPreview(){
+    return Str::limit($this->body, 100);
+  }
+//время создания статьи в человекочитаемом формате с использование  карбоновской функции diffForHumans
+  public function createdAtForHumans(){
+    return $this->created_at->diffForHumans();
+//        return $this->published_at->diffForHumans();
+  }
+  public function publishedAtForHumans(){
+//    return $this->created_at->diffForHumans();
+        return $this->published_at->diffForHumans();
+  }
+
+
+  //пишем скоуп для хранения запроса, используемого для вывода статей на странице, котрый используем в HomeController
+  // в методе  index для модели Article::
+  public function scopeLastLimit($query, $numbers)
+  {
+    return $query->with('tags', 'state')->orderBy('created_at', 'desc')->limit($numbers)->get();
+  }
+
+//пишем скоуп для хранения запроса, используемого для пагинации вывода статей на странице index, который используем в ArticleController в экшне  index для модели Article
+  public function scopeAllPaginate($query, $numbers)
+  {
+    return $query->with('tags', 'state')->orderBy('created_at', 'desc')->paginate($numbers);
+  }
+// скоуп для хранения запроса, используемого для  вывода статьи по её названию в виде слага, который используем в
+// ArticleController в экшне  show для модели Article
+//firstOrFail() выводит первую статью из базы по этому слагу или ошибку
+  public function scopeFindBySlug($query, $slug)
+  {
+    return $query->with('comments','tags', 'state')->where('slug', $slug)->firstOrFail();
+  }
+// скоуп для хранения запроса, используемого для  вывода статьи по её названию в виде слага, который используем в
+// ArticleController в экшне  allByTag
+  public function scopeFindByTag($query)
+  {
+    return $query->with('tags', 'state')->orderBy('created_at', 'desc')->paginate(9);
+  }
+
+
+
+
 
 }
