@@ -3,6 +3,7 @@
 <div id="app">
   <div class="row mt-5">
     <div class="col-12 p-3">
+        <article-component></article-component>
       <img src="{{$article->img}}" class="card-img-top" alt="...">
       <h5 class="mt-5">{{$article->title}}</h5>
       <p>
@@ -16,6 +17,10 @@
       </p>
       <p class="card-text">{{$article->body}}</p>
       <p>Опубликовано: {{$article->publishedAtForHumans()}}</p>
+        <div class="mt-3">
+            <span class="badge bg-success">{{$article->state->likes}}<i class="far fa-thumbs-up"></i></span>
+            <span class="badge bg-primary">{{$article->state->views}}<i class="far fa-eye"></i></span>
+        </div>
     </div>
   </div>
   <hr>
@@ -41,7 +46,7 @@
 
 
                 <div class="toast-header">
-                    <img src="https://via.placeholder.com/100/009BFF/FFFFFF/?text=LARAVEL:8.*" alt="LARAVEL">
+                    <img src="https://via.placeholder.com/100/009BFF/FFFFFF/?text=User" alt="LARAVEL">
                     <strong class="mx-auto">{{$comment->subject}}</strong>
                     <small class="mx-auto">{{$comment->createdAtForHumans()}}</small>
                 </div>

@@ -84,6 +84,10 @@ npm install vue
 перед запуском вебпака запустить:
 npm update vue-loader
 
+npm install vuex --save
+
+
+
 npm run dev   запуск сборщика для разработки
 npm run prod
 npm run watch
@@ -100,6 +104,14 @@ php artisan make:controller ArticleController
 //            "app/Helpers/helpers.php"
 //        ], и запустить композер composer dump-autoload -o
 
+git commit -m "#5 add home-page , articles-page(catalog) with pagination, detail article-page with comments, articles-page to tags with pagination."
 
+php artisan make:controller App\Http\Controllers\Api\ArticleController
 
+для передачи данных компонентов Vue нужно использовать Json, а средством передачи
+ будут ресурсы:
 
+php artisan make:resource ArticleResource
+php artisan make:resource CommentResource
+php artisan make:resource TagResource
+php artisan make:resource StateResource
